@@ -30,6 +30,7 @@ jobs:
         project: 'https://github.com/yellowgomi/test-github-action/projects/1'
         column_name: 'open pr'
     - name: Assign translation/welcome
+      uses: srggrs/assign-one-project-github-action@1.2.0
       if: |
         contains(github.event.issue.labels.*.name, 'translation/welcome') ||
         contains(github.event.pull_request.labels.*.name, 'translation/welcome')
