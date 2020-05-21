@@ -1,0 +1,32 @@
+name: Auto Assign to Project(s)
+
+on:
+  issues:
+    types: [opened, labeled]
+  pull_request:
+    types: [opened, labeled]
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  assign_one_project:
+    runs-on: ubuntu-latest
+    name: Assign to One Project
+    steps:
+    - name: Assign NEW issues to project 1
+      uses: srggrs/assign-one-project-github-action@1.2.0
+      if: |
+        github.event_name == 'issue' && 
+        github.event.action == 'opened'
+      with:
+        project: 'https://github.com/yellowgomi/test-github-action/projects/1'
+        column_name: 'open issue'
+    - name: Assign NEW PR to project 1
+      uses: srggrs/assign-one-project-github-action@1.2.0
+      if: |
+        github.event_name == 'pull_request' && 
+        github.event.action == 'opened'
+      with:
+        project: 'https://github.com/yellowgomi/test-github-action/projects/1'
+        column_name: 'open pr'
+        
